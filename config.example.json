@@ -1,0 +1,11 @@
+{
+  "wifi_ssid": "MyHomeWiFi",
+  "wifi_password": "secret",
+  "latitude": 60.98,
+  "longitude": 25.66,
+  "utc_offset_hours": 3,
+  "wake_up_time": "07:30",
+  "bed_time": "23:00",
+  "blind_steps": 8192,
+  "discord_webhook": "https://discord.com/api/webhooks/..."
+}
