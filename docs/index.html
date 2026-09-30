@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Circadian Blinds - README</title>
+  <style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+  <style type="text/css">body{font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;font-size:16px;line-height:1.5;color:#1f2328;background:#fff;max-width:880px;margin:0 auto;padding:32px 24px}
+h1,h2{border-bottom:1px solid #d1d9e0;padding-bottom:.3em}
+h1{font-size:2em}h2{font-size:1.5em;margin-top:24px}
+a{color:#0969da;text-decoration:none}
+code{font-family:ui-monospace,Consolas,"Liberation Mono",monospace;font-size:85%;background:#eff1f3;padding:.2em .4em;border-radius:6px}
+pre{background:#f6f8fa;padding:16px;border-radius:6px;overflow:auto;line-height:1.45}
+pre code{background:none;padding:0;font-size:85%}
+blockquote{margin:0;padding:0 1em;color:#59636e;border-left:.25em solid #d1d9e0}
+table{border-collapse:collapse;margin:16px 0}
+th,td{border:1px solid #d1d9e0;padding:6px 13px}
+th{background:#f6f8fa;font-weight:600}
+tr:nth-child(2n) td{background:#f6f8fa}
+hr{border:0;height:.25em;background:#d1d9e0;margin:24px 0}
+ul.task-list{list-style:none;padding-left:1.2em}
+header#title-block-header{display:none}
+</style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Circadian Blinds - README</h1>
+</header>
+<h1 id="circadian-blinds--smart-home-controller-for-raspberry-pi-pico-w">Circadian
+Blinds – Smart Home Controller for Raspberry Pi Pico W</h1>
+<p><em>Automatic window blinds and room lighting that follow your daily
+rhythm.</em></p>
+<p><strong>Circadian Blinds</strong> is a small smart home system built
+on the <strong>Raspberry Pi Pico W</strong> and
+<strong>MicroPython</strong>. It opens the blinds gradually in the
+morning, closes them in the evening and dims the room light at bedtime.
+Decisions are based on indoor and outdoor light levels, the local
+weather forecast and a user-defined sleep schedule. The system can be
+controlled from any browser on the home network, and it sends
+notifications to a Discord channel.</p>
+<p><strong>Repository:</strong> <a href="https://github.com/Andriyaskiv/circadian-blinds-pico">https://github.com/Andriyaskiv/circadian-blinds-pico</a><br />
+<strong>Online version of this README:</strong> <a href="https://andriyaskiv.github.io/circadian-blinds-pico/">https://andriyaskiv.github.io/circadian-blinds-pico/</a></p>
+<blockquote>
+<p><strong>Note:</strong> This project was made as a course project for
+an IoT / smart home course. It is a prototype and it is not meant to
+control mains-powered devices without proper safety measures.</p>
+</blockquote>
+<hr />
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol type="1">
+<li><a href="#features">Features</a></li>
+<li><a href="#hardware">Hardware</a></li>
+<li><a href="#prerequisites-and-dependencies">Prerequisites and
+Dependencies</a></li>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#configuration">Configuration</a></li>
+<li><a href="#usage">Usage</a></li>
+<li><a href="#project-structure">Project Structure</a></li>
+<li><a href="#roadmap">Roadmap</a></li>
+<li><a href="#maintainer">Maintainer</a></li>
+<li><a href="#license">License</a></li>
+</ol>
+<h2 id="features">Features</h2>
+<ul>
+<li><strong>Sunrise routine</strong> – the blinds open step by step when
+it gets light outside or at the wake-up time.</li>
+<li><strong>Night routine</strong> – at bedtime the blinds close and the
+LED lamp dims slowly to 0 %.</li>
+<li><strong>Weather awareness</strong> – the forecast from the <a href="https://open-meteo.com/">Open-Meteo API</a> is checked every 30
+minutes.
+<ul>
+<li>On very sunny and hot days the blinds stay half-closed.</li>
+<li>On cloudy days the lamp brightness is increased.</li>
+</ul></li>
+<li><strong>Web dashboard</strong> – a simple REST API and web page to
+see sensor values and control the blinds manually.</li>
+<li><strong>Remote notifications</strong> – important events are sent to
+Discord through a webhook.</li>
+</ul>
+<h2 id="hardware">Hardware</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Component</th>
+<th>Type</th>
+<th>Pico W pin</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>BH1750 light sensor</td>
+<td>Sensor (I²C)</td>
+<td>GP4 (SDA), GP5 (SCL)</td>
+<td>Indoor light level in lux</td>
+</tr>
+<tr class="even">
+<td>LDR + 10 kΩ resistor</td>
+<td>Sensor (analog)</td>
+<td>GP26 (ADC0)</td>
+<td>Outdoor light level</td>
+</tr>
+<tr class="odd">
+<td>HC-SR501 PIR sensor</td>
+<td>Sensor (digital)</td>
+<td>GP15</td>
+<td>Detects if someone is in the room</td>
+</tr>
+<tr class="even">
+<td>28BYJ-48 stepper + ULN2003</td>
+<td>Actuator</td>
+<td>GP10–GP13</td>
+<td>Rolls the blind up and down</td>
+</tr>
+<tr class="odd">
+<td>LED strip + MOSFET</td>
+<td>Actuator (PWM)</td>
+<td>GP16</td>
+<td>Dimmable room light</td>
+</tr>
+<tr class="even">
+<td>Push button</td>
+<td>Input</td>
+<td>GP14</td>
+<td>Manual open / close</td>
+</tr>
+</tbody>
+</table>
+<h2 id="prerequisites-and-dependencies">Prerequisites and
+Dependencies</h2>
+<p>Before installing, make sure you have:</p>
+<ul>
+<li>A <strong>Raspberry Pi Pico W</strong> with <a href="https://micropython.org/download/RPI_PICO_W/">MicroPython
+firmware</a> v1.23 or newer</li>
+<li>A 2.4 GHz Wi-Fi network</li>
+<li>A computer with <strong>Python 3.10+</strong></li>
+<li><a href="https://docs.micropython.org/en/latest/reference/mpremote.html"><code>mpremote</code></a>
+for copying files to the board</li>
+<li>A Discord server where you can create a webhook (optional)</li>
+</ul>
+<p>The project uses the following <strong>external
+libraries</strong>:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Library</th>
+<th>Version</th>
+<th>Used for</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://github.com/miguelgrinberg/microdot"><code>microdot</code></a></td>
+<td>2.x</td>
+<td>Web server and REST API</td>
+</tr>
+<tr class="even">
+<td><a href="https://github.com/flrrth/pico-bh1750"><code>bh1750</code></a></td>
+<td>latest</td>
+<td>Driver for the BH1750 light sensor</td>
+</tr>
+<tr class="odd">
+<td><code>requests</code></td>
+<td>built-in (Pico W firmware)</td>
+<td>HTTP requests to Open-Meteo and Discord</td>
+</tr>
+<tr class="even">
+<td><code>ntptime</code></td>
+<td>built-in</td>
+<td>Time synchronisation over NTP</td>
+</tr>
+</tbody>
+</table>
+<h2 id="installation">Installation</h2>
+<ol type="1">
+<li><p>Clone the repository:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/Andriyaskiv/circadian-blinds-pico.git</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> circadian-blinds-pico</span></code></pre></div></li>
+<li><p>Install <code>mpremote</code> on your computer:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install mpremote</span></code></pre></div></li>
+<li><p>Connect the Pico W with a USB cable and install the libraries on
+the board:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mpremote</span> mip install <span class="at">--target</span> /lib/microdot <span class="dt">\</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    github:miguelgrinberg/microdot/src/microdot/__init__.py <span class="dt">\</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    github:miguelgrinberg/microdot/src/microdot/microdot.py</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="ex">mpremote</span> mip install <span class="at">--target</span> /lib/bh1750 <span class="dt">\</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    github:flrrth/pico-bh1750/bh1750/__init__.py <span class="dt">\</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    github:flrrth/pico-bh1750/bh1750/bh1750.py</span></code></pre></div></li>
+<li><p>Create your <code>config.json</code> (see <a href="#configuration">Configuration</a>) and copy the project files to
+the board:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mpremote</span> cp src/<span class="pp">*</span>.py :</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">mpremote</span> mkdir web</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ex">mpremote</span> cp src/web/index.html :web/index.html</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ex">mpremote</span> cp config.json :</span></code></pre></div></li>
+<li><p>Reset the board. The program starts automatically from
+<code>main.py</code>.</p></li>
+</ol>
+<h2 id="configuration">Configuration</h2>
+<p>All settings are stored in <code>config.json</code>. Copy <a href="https://github.com/Andriyaskiv/circadian-blinds-pico/blob/main/config.example.json"><code>config.example.json</code></a>
+and edit the values:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;wifi_ssid&quot;</span><span class="fu">:</span> <span class="st">&quot;MyHomeWiFi&quot;</span><span class="fu">,</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;wifi_password&quot;</span><span class="fu">:</span> <span class="st">&quot;secret&quot;</span><span class="fu">,</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;latitude&quot;</span><span class="fu">:</span> <span class="fl">60.98</span><span class="fu">,</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;longitude&quot;</span><span class="fu">:</span> <span class="fl">25.66</span><span class="fu">,</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;utc_offset_hours&quot;</span><span class="fu">:</span> <span class="dv">3</span><span class="fu">,</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;wake_up_time&quot;</span><span class="fu">:</span> <span class="st">&quot;07:30&quot;</span><span class="fu">,</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;bed_time&quot;</span><span class="fu">:</span> <span class="st">&quot;23:00&quot;</span><span class="fu">,</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;blind_steps&quot;</span><span class="fu">:</span> <span class="dv">8192</span><span class="fu">,</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;discord_webhook&quot;</span><span class="fu">:</span> <span class="st">&quot;https://discord.com/api/webhooks/...&quot;</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<blockquote>
+<p><strong>Warning:</strong> Never commit your real
+<code>config.json</code> to Git. It contains your Wi-Fi password and
+webhook URL.</p>
+</blockquote>
+<h2 id="usage">Usage</h2>
+<p>After boot, the Pico W prints its IP address to the serial console
+(for example with <code>mpremote repl</code>):</p>
+<pre class="text"><code>[wifi] connected, IP = 192.168.1.42
+[web] dashboard running on http://192.168.1.42/</code></pre>
+<p>Open the address in a browser to see the dashboard. You can also use
+the REST API directly:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read all sensor values</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> http://192.168.1.42/api/status</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Open the blinds to 75 %</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-X</span> POST http://192.168.1.42/api/blinds <span class="at">-d</span> <span class="st">&#39;{&quot;position&quot;: 75}&#39;</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the lamp to 60 %</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-X</span> POST http://192.168.1.42/api/lamp <span class="at">-d</span> <span class="st">&#39;{&quot;brightness&quot;: 60}&#39;</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Turn on night mode immediately</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-X</span> POST http://192.168.1.42/api/mode <span class="at">-d</span> <span class="st">&#39;{&quot;mode&quot;: &quot;night&quot;}&#39;</span></span></code></pre></div>
+<p>Example response of <code>/api/status</code>:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;indoor_lux&quot;</span><span class="fu">:</span> <span class="dv">312</span><span class="fu">,</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;outdoor_light&quot;</span><span class="fu">:</span> <span class="fl">0.64</span><span class="fu">,</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;presence&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;blinds_position&quot;</span><span class="fu">:</span> <span class="dv">75</span><span class="fu">,</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;lamp_brightness&quot;</span><span class="fu">:</span> <span class="dv">40</span><span class="fu">,</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;weather&quot;</span><span class="fu">:</span> <span class="st">&quot;partly cloudy&quot;</span><span class="fu">,</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;mode&quot;</span><span class="fu">:</span> <span class="st">&quot;auto&quot;</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<h2 id="project-structure">Project Structure</h2>
+<pre class="text"><code>circadian-blinds-pico/
+├── src/
+│   ├── main.py          # Starts Wi-Fi, web server and scheduler
+│   ├── sensors.py       # BH1750, LDR and PIR readings
+│   ├── actuators.py     # Stepper motor and PWM lamp control
+│   ├── automations.py   # Sunrise, night and weather rules
+│   ├── notifier.py      # Discord webhook messages
+│   └── web/index.html   # Dashboard page
+├── docs/index.html      # HTML version of this README (GitHub Pages)
+├── config.example.json
+├── LICENSE
+└── README.md</code></pre>
+<h2 id="roadmap">Roadmap</h2>
+<ul class="task-list">
+<li><label><input type="checkbox" checked></input>Read light sensors and
+PIR</label></li>
+<li><label><input type="checkbox" checked></input>Control stepper motor and
+LED dimming</label></li>
+<li><label><input type="checkbox" checked></input>Sunrise and night
+automations</label></li>
+<li><label><input type="checkbox" checked></input>Discord
+notifications</label></li>
+<li><label><input type="checkbox"></input>Limit switch for blind
+calibration</label></li>
+<li><label><input type="checkbox"></input>Support for more than one
+window</label></li>
+</ul>
+<h2 id="maintainer">Maintainer</h2>
+<p>This project is maintained by <strong>Andriy Yaskiv</strong>,
+exchange student in Industrial Information Technology at LAB University
+of Applied Sciences.</p>
+<ul>
+<li>GitHub: <a href="https://github.com/Andriyaskiv">@Andriyaskiv</a></li>
+<li>Issues and suggestions: please open an <a href="https://github.com/Andriyaskiv/circadian-blinds-pico/issues">issue</a>.</li>
+</ul>
+<h2 id="license">License</h2>
+<p>Distributed under the <strong>MIT License</strong>. See <a href="https://github.com/Andriyaskiv/circadian-blinds-pico/blob/main/LICENSE"><code>LICENSE</code></a>
+for more information.</p>
+</body>
+</html>
