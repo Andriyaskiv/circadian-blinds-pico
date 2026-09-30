@@ -195,7 +195,6 @@ circadian-blinds-pico/
 
 This project is maintained by **Andriy Yaskiv**, exchange student in Industrial Information Technology at LAB University of Applied Sciences.
 
-- E-mail: andriyaskiv123@gmail.com
 - GitHub: [@Andriyaskiv](https://github.com/Andriyaskiv)
 - Issues and suggestions: please open an [issue](https://github.com/Andriyaskiv/circadian-blinds-pico/issues).
 
