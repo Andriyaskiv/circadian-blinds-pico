@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Circadian Blinds</title>
+<style>
+  body { font-family: sans-serif; background: #1d2433; color: #eee; margin: 0; padding: 16px; }
+  h1 { font-size: 1.4em; }
+  .card { background: #2a3347; border-radius: 10px; padding: 14px; margin-bottom: 12px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; }
+  .value { font-size: 1.6em; font-weight: bold; }
+  button { padding: 8px 14px; margin: 4px 4px 0 0; border: 0; border-radius: 6px; background: #f2a541; cursor: pointer; }
+  input[type=range] { width: 100%; }
+</style>
+</head>
+<body>
+<h1>Circadian Blinds</h1>
+<div class="card grid" id="status">Loading...</div>
+<div class="card">
+  <p>Blinds position: <span id="bpos">0</span> %</p>
+  <input type="range" id="blinds" min="0" max="100" step="10">
+  <p>Lamp brightness: <span id="lpos">0</span> %</p>
+  <input type="range" id="lamp" min="0" max="100" step="5">
+</div>
+<div class="card">
+  Mode:
+  <button onclick="setMode('auto')">Auto</button>
+  <button onclick="setMode('manual')">Manual</button>
+  <button onclick="setMode('night')">Night</button>
+</div>
+<script>
+const post = (url, body) => fetch(url, {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(body)});
+async function refresh() {
+  const s = await (await fetch('/api/status')).json();
+  document.getElementById('status').innerHTML = [
+    ['Indoor', s.indoor_lux + ' lx'], ['Outdoor', Math.round(s.outdoor_light * 100) + ' %'],
+    ['Presence', s.presence ? 'yes' : 'no'], ['Weather', s.weather], ['Mode', s.mode]
+  ].map(([k, v]) => `<div><div>${k}</div><div class="value">${v}</div></div>`).join('');
+  document.getElementById('bpos').textContent = s.blinds_position;
+  document.getElementById('lpos').textContent = s.lamp_brightness;
+  document.getElementById('blinds').value = s.blinds_position;
+  document.getElementById('lamp').value = s.lamp_brightness;
+}
+document.getElementById('blinds').onchange = e => post('/api/blinds', {position: +e.target.value}).then(refresh);
+document.getElementById('lamp').onchange = e => post('/api/lamp', {brightness: +e.target.value}).then(refresh);
+function setMode(m) { post('/api/mode', {mode: m}).then(refresh); }
+refresh(); setInterval(refresh, 5000);
+</script>
+</body>
+</html>
